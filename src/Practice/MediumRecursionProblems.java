@@ -41,25 +41,25 @@ public class MediumRecursionProblems {
      * The entrance will be the most upper left cell and the exit will be the most lower right cell.
      * The rat may go only to 2 directions (Down and Right) and there're blocks in the maze which he cannot pass through.
      *
-     * @param i position of the rat in column
-     * @param j position of the rat in row
+     * @param y position of the rat in column
+     * @param x position of the rat in row
      * @param m size of row
      * @param n size of column
-     * @param Maze matrix of the maze
+     * @param maze matrix of the maze
      * @return number of paths
      */
-    public static int mazeRat(int i, int j, int m, int n, int[][]Maze){
+    public static int mazeRat(int y, int x, int m, int n, int[][] maze){
 
         // the rat has reached out of bounds or reached a block cell - the path is not counted
-        if(i < 0 || j < 0 || i == m || j == n || Maze[i][j] == -1)
+        if(y == m || x == n || maze[y][x] == -1)
             return 0;
 
         // The rat has reached the final cell in the maze
-        if(i == m - 1 && j == n - 1)
+        if(y == m - 1 && x == n - 1)
             return 1;
 
         // Since the rat has 2 directions, we need to return result of 2 calls each time
-        return mazeRat(i + 1, j, m, n, Maze) + mazeRat(i, j + 1, m, n, Maze);
+        return mazeRat(y + 1, x, m, n, maze) + mazeRat(y, x + 1, m, n, maze);
     }
 
     /**
@@ -88,9 +88,14 @@ public class MediumRecursionProblems {
 
     public static void main(String[] args) {
 
-        // Example for Maze Rat - should return 3
-        int [] [] maze = {{0, 0, 0, 0, -1}, {0, -1, 0, 0, 0}, {0, 0, 0, 0, 0}, {-1, 0, 0, 0, 0}};
-        System.out.println("mazeRat=" + mazeRat(0, 0, maze[0].length-1, maze.length-1, maze));
+        int [] [] maze1 = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}; // Will return 6
+        System.out.println("mazeRat1=" + mazeRat(0, 0, maze1.length, maze1[0].length, maze1));
+
+        int [] [] maze2 = {{0, 0, 0}, {0, 0, 0}, {0, -1, 0}}; // Will return 3
+        System.out.println("mazeRat2=" + mazeRat(0, 0, maze2.length, maze2[0].length, maze2));
+
+        int [] [] maze3 = {{0, -1, 0}, {0, 0, 0}, {0, -1, 0}}; // Will return 1
+        System.out.println("mazeRat3=" + mazeRat(0, 0, maze3.length, maze3[0].length, maze3));
 
         // Example for collect - result should be 79 {collect(34), skipped, collect(20), skipped, skipped, collected(26)}
         int [] collection = {33, 10, 20, 5, 14, 26};
