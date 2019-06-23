@@ -85,6 +85,24 @@ public class MediumRecursionProblems {
         return Math.max(collecting, skipping);
     }
 
+    /**
+     * Return the minimum number of calculation required to get from x to y
+     * Operation permitted: x + 1 or x * 2
+     * @param x start number
+     * @param y stop number
+     * @return minimum number of operations
+     */
+    public static int minOperation(int x, int y){
+        // Stop condition
+        if(x >= y)
+            return 0;
+
+        int way1 = minOperation(x + 1, y) + 1;
+        int way2 = minOperation(x * 2, y) + 1;
+
+        return Math.min(way1, way2);
+    }
+
 
     public static void main(String[] args) {
 
@@ -94,12 +112,11 @@ public class MediumRecursionProblems {
         int [] [] maze2 = {{0, 0, 0}, {0, 0, 0}, {0, -1, 0}}; // Will return 3
         System.out.println("mazeRat2=" + mazeRat(0, 0, maze2.length, maze2[0].length, maze2));
 
-        int [] [] maze3 = {{0, -1, 0}, {0, 0, 0}, {0, -1, 0}}; // Will return 1
-        System.out.println("mazeRat3=" + mazeRat(0, 0, maze3.length, maze3[0].length, maze3));
-
         // Example for collect - result should be 79 {collect(34), skipped, collect(20), skipped, skipped, collected(26)}
         int [] collection = {33, 10, 20, 5, 14, 26};
         System.out.println("Collect=" + collect(0, collection.length, collection));
+
+        System.out.println("minOperation=" + minOperation(10, 22)); // Will return 2 -> (10 + 1 * 2)
 
     }
 
