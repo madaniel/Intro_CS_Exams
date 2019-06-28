@@ -103,6 +103,40 @@ public class MediumRecursionProblems {
         return Math.min(way1, way2);
     }
 
+    /**
+     * Anagram = word with the same letters but not necessarily in the same order
+     * For example: abcd <-> dcab are Anagram but abbd <-> dbca are not Anagram because they don't have the same letters
+     *
+     * This problem is a Backtracking problem variant of "collect" or "not collect" decision
+     *
+     * @param word1 string 1
+     * @param word2 string 2
+     * @return true - words are Anagram of each other, false - not Anagram
+     */
+    public static boolean isAnagram(String word1, String word2){
+        // Check - both words must to be in the same length
+        if(word1.length() != word2.length())
+            return false;
+
+        // Stop condition - bot words are empty
+        // Since both words are in the same length (last condition) so we check only one word
+        if(word1.length() == 0)
+            return true;
+
+        // We use charAt and indexOf to search the first letter in word1 in word2
+        char word1FirstLetter = word1.charAt(0);
+        int indexFoundInWord2 = word2.indexOf(word1FirstLetter);
+
+        // First letter in word1 is not found in word2
+        if(indexFoundInWord2 < 0) // -1 value means not found
+            return false;
+
+        // First letter is found - we need to proceed
+        // In the next call - we omit the first letter from word1 and the same letter from word2
+        // We cut word2 into 2 slices: from 0 to the found letter (excluded) and from the letter + 1 until the end
+        return isAnagram(word1.substring(1), word2.substring(0, indexFoundInWord2) + word2.substring(indexFoundInWord2 + 1));
+    }
+
 
     public static void main(String[] args) {
 
@@ -118,6 +152,10 @@ public class MediumRecursionProblems {
 
         System.out.println("minOperation=" + minOperation(10, 22)); // Will return 2 -> (10 + 1 * 2)
 
+        System.out.println("isAnagram=" + isAnagram("abcd", "dcab"));  // Will return true
+        System.out.println("isAnagram=" + isAnagram("abcd", "abbd"));  // Will return false
+        System.out.println("isAnagram=" + isAnagram("abcd", "abc"));  // Will return false
+        System.out.println("isAnagram=" + isAnagram("abcd", "dabc"));  // Will return true
     }
 
 }

@@ -115,7 +115,6 @@ public class EasyRecursionProblems {
 
         // Continue to check with the substring - without the head and tail
         return isPalindrome(str.substring(1, str.length()-1));
-
     }
 
     /**
@@ -125,7 +124,5 @@ public class EasyRecursionProblems {
         System.out.println("isPalindrome=" + isPalindrome("abba")); // True
         System.out.println("isPalindrome=" + isPalindrome("a"));  // True
         System.out.println("isPalindrome=" + isPalindrome("abab"));  // False
-
     }
-
 }
