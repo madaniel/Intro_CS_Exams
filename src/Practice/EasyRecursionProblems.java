@@ -95,8 +95,36 @@ public class EasyRecursionProblems {
         return isSymmetric(left + 1, right - 1, arr);
     }
 
+    /**
+     * Palindrome = string with equal chars from its both side
+     * For example: abba, aca, a
+     * We use charAt to check the chars in the start and in the end of the string.
+     * Each time, we will cut the string until it will be empty or with single char left.
+     *
+     * @param str target string
+     * @return true - string is palindrome, false - not palindrome
+     */
+    public static boolean isPalindrome(String str){
+        // Base case - string with 1 char or empty is a palindrome
+        if( str.length() <= 1)
+                return true;
 
+        // else - we need to compare both sides
+        if(str.charAt(0) != str.charAt(str.length()-1))
+            return false;  // Not a palindrome
+
+        // Continue to check with the substring - without the head and tail
+        return isPalindrome(str.substring(1, str.length()-1));
+
+    }
+
+    /**
+     * Here you can test the function above with debugger and see how it works     *
+     */
     public static void main(String[] args) {
+        System.out.println("isPalindrome=" + isPalindrome("abba")); // True
+        System.out.println("isPalindrome=" + isPalindrome("a"));  // True
+        System.out.println("isPalindrome=" + isPalindrome("abab"));  // False
 
     }
 
