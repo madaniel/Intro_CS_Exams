@@ -137,7 +137,47 @@ public class MediumRecursionProblems {
         return isAnagram(word1.substring(1), word2.substring(0, indexFoundInWord2) + word2.substring(indexFoundInWord2 + 1));
     }
 
+    /**
+     * We compare two strings with usage of * as a wildcard char in the second word
+     * The second word may contain more than one * but not one after the other (**)
+     *
+     * @param word1 string1
+     * @param word2 string2 to compare with *
+     * @return true - 2 strings match, false - 2 strings not match
+     */
+    public static boolean samePattern(String word1, String word2){
 
+        boolean word1IsEmpty = word1.length() == 0;
+        boolean word2IsEmpty = word2.length() == 0;
+        boolean word2IsAsterisk = word2.length() == 1 && word2.charAt(0) == '*';
+
+        // Stop condition - word 1 is empty - no more letters to check and also word 2 is empty
+        if(word1IsEmpty){
+            if(word2IsEmpty || word2IsAsterisk)
+                return true;
+            // else - word2 is not empty and still has char to compare
+            return false;
+        }
+
+        // Both char equals - process with both words to the next char
+        if(word1.charAt(0) == word2.charAt(0))
+            return samePattern(word1.substring(1), word2.substring(1));
+
+        // Chars are not equal (above condition), and char in second word is not *
+        if(word2.charAt(0) != '*')
+            return false;
+
+        // Char in word2 is * - we proceed to the next char in word2 until its end
+        if (samePattern(word1.substring(1), word2))
+            return true;
+
+        // Word2 remained with chars after the * - so we proceed without the *
+        return samePattern(word1, word2.substring(1));
+    }
+
+    /**
+     * Here you can test the function above with debugger and see how it works     *
+     */
     public static void main(String[] args) {
 
         int [] [] maze1 = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}; // Will return 6
