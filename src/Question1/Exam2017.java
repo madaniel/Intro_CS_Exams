@@ -25,7 +25,7 @@ public class Exam2017 {
      * Here you can test the function above with debugger and see how it works     *
      */
     public static void main(String[] args) {
-        System.out.println(ways(4, 2));
+        System.out.println(ways(4, 2)); // Should return 4
     }
 
 }
