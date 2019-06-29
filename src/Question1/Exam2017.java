@@ -4,9 +4,9 @@ public class Exam2017 {
 
     /**
      * Question 2017b A3 84
-     * @param k
-     * @param n
-     * @return
+     * @param k steps allowed
+     * @param n target number
+     * @return number of ways to get to n using k steps
      */
     public static int ways(int k, int n){
         // Stop conditions

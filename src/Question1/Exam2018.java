@@ -18,7 +18,7 @@ public class Exam2018 {
      * @param max max number allowed in the array
      * @param currentIndex index in the array
      * @param currentNumber number added to the array
-     * @return
+     * @return number of possible arrays
      */
     private static int howManySorted(int n, int max, int currentIndex, int currentNumber){
         // Stop condition 1 - We've reached the max amount of numbers in the array
