@@ -176,6 +176,41 @@ public class MediumRecursionProblems {
     }
 
     /**
+     * We need to find and print all the possible sum of three numbers of a target number
+     * Each number in the sum should be 1 <= x <= 10
+     * For example: for number 3 there's a single sum: 1 + 1 + 1 = 3
+     * @param num target number
+     * @return number of possible sums
+     */
+    public static int threeSum(int num){
+        return threeSum(num, 1, 1, 1, 0 );
+
+    }
+
+    private static int threeSum(int num, int x1, int x2, int x3, int counter) {
+
+        // Base case - all three numbers summed into target number
+        if (x1 + x2 + x3 == num) {
+            System.out.println(x1 + " + " + x2 + " + " + x3);
+            counter++;
+        }
+
+        if (x1 == 10) {
+            if (x2 == 10) {
+                if (x3 == 10)  // All Xs have reached 10 - we cannot proceed
+                    return counter;
+
+                else // X1 and X2 have reached 10, incrementing x3 by 1
+                    return threeSum(num, 1, 1, x3 + 1, counter);}
+
+            else  // X1 have reached 10 but not X2, incrementing x2 by 1
+                return threeSum(num, 1, x2 + 1, x3, counter);}
+
+        else // X1 have not reached 10, incrementing x1 by 1
+           return threeSum(num, x1 + 1, x2, x3, counter);
+    }
+
+    /**
      * Here you can test the function above with debugger and see how it works     *
      */
     public static void main(String[] args) {
@@ -196,6 +231,8 @@ public class MediumRecursionProblems {
         System.out.println("isAnagram=" + isAnagram("abcd", "abbd"));  // Will return false
         System.out.println("isAnagram=" + isAnagram("abcd", "abc"));  // Will return false
         System.out.println("isAnagram=" + isAnagram("abcd", "dabc"));  // Will return true
-    }
 
+        System.out.println("threeSum of number 1: " + threeSum(3));
+        System.out.println("threeSum of number 5: " + threeSum(5));
+    }
 }
