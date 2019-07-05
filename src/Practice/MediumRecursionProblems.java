@@ -211,9 +211,65 @@ public class MediumRecursionProblems {
     }
 
     /**
+     * We need to find the how many interpolation we can create using numbers which summed into target number
+     * We need also to print all interpolation
+     *
+     * @param num target number
+     * @return number of interpolations to sum number to num
+     */
+    public static int countSumToN(int num){
+        return countSumToN(num, new int[num] , 0);
+    }
+
+    /**
+     * We decrement the num until we get to 0.
+     * The path will include the number we've used until num is 0.
+     * @param num target number to reach
+     * @param path array to save the number used
+     * @param index index point to the last num used
+     * @return
+     */
+    private static int countSumToN(int num, int[] path, int index){
+        // Stop condition - we've reached zero
+        if(num==0){
+            printArray(path, index-1); // Index need to decremented back
+            System.out.println();
+            return 1;  // Decrement of 1 or 2 have resulted in 0 - count this way
+        }
+
+        // Stop condition - we've missed the zero
+        if(num < 0)
+            return 0;  // Decrement of 1 or 2 have resulted in negative number - discard this way
+
+        path[index] = 1;
+        int way1 = countSumToN(num-1, path, index+1);
+
+        path[index] = 2;
+        int way2 = countSumToN(num-2, path, index+1);
+
+        return way1+way2;
+    }
+
+    /**
+     * Print array of int in recursion
+     * @param arr array of int
+     * @param index index of array
+     */
+    private static void printArray(int [] arr, int index){
+        // Stop condition - End of the array
+        if(index < 0)
+            return;
+
+        System.out.print(arr[index] + " ");
+        printArray(arr, index-1);
+    }
+
+    /**
      * Here you can test the function above with debugger and see how it works     *
      */
     public static void main(String[] args) {
+
+        System.out.println("countSumToN=" + countSumToN(3));
 
         int [] [] maze1 = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}; // Will return 6
         System.out.println("mazeRat1=" + mazeRat(0, 0, maze1.length, maze1[0].length, maze1));
