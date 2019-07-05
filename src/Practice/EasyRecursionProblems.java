@@ -60,6 +60,28 @@ public class EasyRecursionProblems {
     }
 
     /**
+     * Count how many chars exist in string
+     *
+     * @param word string to check
+     * @param letter char to count
+     * @return number of chars
+     */
+    public static int countChar(String word, char letter){
+        //Stop condition - end of string
+        if(word.length() == 0)
+            return 0;
+
+        int counter = 0;
+
+        counter += countChar(word.substring(1), letter);
+
+        if(word.charAt(0) == letter)
+            counter += 1;
+
+        return counter;
+    }
+
+    /**
      * Calc factorial of n number
      * 1 * 2 * 3 * ... * n
      *
@@ -153,6 +175,9 @@ public class EasyRecursionProblems {
      * Here you can test the function above with debugger and see how it works     *
      */
     public static void main(String[] args) {
+        System.out.println("countChar=" + countChar("abcdb", 'b'));  // 2
+        System.out.println("countChar=" + countChar("a b a cbdb aa", 'a'));  // 4
+        System.out.println("countChar=" + countChar("aaaaaaaaaaaa", 'b'));  // 0
         int [] numArray = {1, 2, 3};
         System.out.println("sumArray=" + sumArray(numArray, 0));  // 6
         System.out.println("findMax=" + findMax(numArray, 0));  // 3
