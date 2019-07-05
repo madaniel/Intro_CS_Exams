@@ -82,6 +82,22 @@ public class EasyRecursionProblems {
     }
 
     /**
+     * Return true if all letters in string are lowercase
+     * @param word string to check
+     * @return true - if all chars are small, false -  otherwise
+     */
+    public static boolean isAllSmallLetter(String word){
+        // Stop condition - we scanned all the string
+        if(word.length()==0)
+            return true;
+
+        if(word.charAt(0) >= 'a' && word.charAt(0) <= 'z')
+            return isAllSmallLetter(word.substring(1));
+
+        return false;
+
+    }
+    /**
      * Calc factorial of n number
      * 1 * 2 * 3 * ... * n
      *
@@ -175,6 +191,8 @@ public class EasyRecursionProblems {
      * Here you can test the function above with debugger and see how it works     *
      */
     public static void main(String[] args) {
+        System.out.println("isAllSmallLetter=" + isAllSmallLetter("abcd"));  // True
+        System.out.println("isAllSmallLetter=" + isAllSmallLetter("abZd"));  // False
         System.out.println("countChar=" + countChar("abcdb", 'b'));  // 2
         System.out.println("countChar=" + countChar("a b a cbdb aa", 'a'));  // 4
         System.out.println("countChar=" + countChar("aaaaaaaaaaaa", 'b'));  // 0
