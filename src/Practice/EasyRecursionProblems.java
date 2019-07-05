@@ -28,6 +28,38 @@ public class EasyRecursionProblems {
     }
 
     /**
+     * Sum all numbers in the array
+     *
+     * @param arr array of numbers
+     * @param index current index
+     * @return sum of the array
+     */
+    public static int sumArray(int [] arr, int index){
+        // Stop condition - end of the array
+        if(index == arr.length-1)
+            return arr[index];
+
+        return arr[index] + sumArray(arr, index+1);
+    }
+
+    /**
+     * Find the max number in the array
+     *
+     * @param arr target array
+     * @param index index of the array
+     * @return max value
+     */
+    public static int findMax(int [] arr, int index){
+        if(index == arr.length-1)
+            return arr[index];
+
+        int max = findMax(arr, index +1);
+
+        // We return the current value only if it's larger than the return value
+        return max > arr[index] ? max : arr[index];
+    }
+
+    /**
      * Calc factorial of n number
      * 1 * 2 * 3 * ... * n
      *
@@ -121,6 +153,9 @@ public class EasyRecursionProblems {
      * Here you can test the function above with debugger and see how it works     *
      */
     public static void main(String[] args) {
+        int [] numArray = {1, 2, 3};
+        System.out.println("sumArray=" + sumArray(numArray, 0));  // 6
+        System.out.println("findMax=" + findMax(numArray, 0));  // 3
         System.out.println("isPalindrome=" + isPalindrome("abba")); // True
         System.out.println("isPalindrome=" + isPalindrome("a"));  // True
         System.out.println("isPalindrome=" + isPalindrome("abab"));  // False
