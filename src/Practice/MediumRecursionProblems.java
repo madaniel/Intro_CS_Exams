@@ -269,7 +269,7 @@ public class MediumRecursionProblems {
      */
     public static void main(String[] args) {
 
-        System.out.println("countSumToN=" + countSumToN(3));
+        System.out.println("countSumToN=" + countSumToN(5));
 
         int [] [] maze1 = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}; // Will return 6
         System.out.println("mazeRat1=" + mazeRat(0, 0, maze1.length, maze1[0].length, maze1));

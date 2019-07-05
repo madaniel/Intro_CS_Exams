@@ -188,9 +188,39 @@ public class EasyRecursionProblems {
     }
 
     /**
+     * Count haw many digit in number
+     * @param num target num
+     * @return number of digit
+     */
+    public static int howManyDigit(int num){
+        //Stop condition
+        if(num < 10)
+            return 1;
+
+        return 1 + howManyDigit(num/10);
+    }
+
+    public static boolean isAscending(int num){
+        // Stop condition
+        if(num < 10)
+            return true;
+
+        int lastNumber = num % 10;
+        int secondLastNumber = (num / 10) % 10;
+
+        if(lastNumber > secondLastNumber)
+            return isAscending(num / 10);
+
+        return false;
+    }
+
+    /**
      * Here you can test the function above with debugger and see how it works     *
      */
     public static void main(String[] args) {
+        System.out.println("isAscending=" + isAscending(123));  // True
+        System.out.println("isAscending=" + isAscending(12315));  // False
+        System.out.println("HowManyDigit=" + howManyDigit(12345));
         System.out.println("isAllSmallLetter=" + isAllSmallLetter("abcd"));  // True
         System.out.println("isAllSmallLetter=" + isAllSmallLetter("abZd"));  // False
         System.out.println("countChar=" + countChar("abcdb", 'b'));  // 2
