@@ -215,9 +215,29 @@ public class EasyRecursionProblems {
     }
 
     /**
+     * Count how many numbers equal or larger than target number
+     * @param dArr array of numbers
+     * @param num target number
+     * @param idx index of array
+     * @return count
+     */
+    public static int countNums(double [] dArr, double num, int idx){
+        if(idx == dArr.length)
+            return 0;
+
+        if(dArr[idx] >= num)
+            return 1 + countNums(dArr, num, idx+1);
+
+        return countNums(dArr, num, idx+1);
+    }
+
+
+    /**
      * Here you can test the function above with debugger and see how it works     *
      */
     public static void main(String[] args) {
+        double [] test = {1, 2, 3, 4, 5, 6};
+        System.out.println("countNums=" + countNums(test, 3, 0));  //4
         System.out.println("isAscending=" + isAscending(123));  // True
         System.out.println("isAscending=" + isAscending(12315));  // False
         System.out.println("HowManyDigit=" + howManyDigit(12345));
