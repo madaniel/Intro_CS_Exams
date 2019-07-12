@@ -265,9 +265,54 @@ public class MediumRecursionProblems {
     }
 
     /**
-     * Here you can test the function above with debugger and see how it works     *
+     * Return true if all numbers in each row is smaller than all numbers in the next row
+     *
+     * @param mat matrix
+     * @param y row index
+     * @return true - if matrix value ascending false - otherwise
+     */
+    public static boolean isMatrixAscending(int [][] mat, int y){
+        // Stop in the last row
+        if(y > mat.length-2)
+            return true;
+
+        int minInRow = minInRow(mat[y+1], 0, mat[y+1][0]);
+        int maxInRow = maxInRow(mat[y], 0, mat[y][0]);
+
+        if(maxInRow < minInRow)
+            return isMatrixAscending(mat, y+1);
+
+    return false;
+    }
+
+    private static int maxInRow(int [] arr, int idx, int max){
+        // Stop in the end of the array
+        if(idx > arr.length-1)
+            return max;
+
+        if(arr[idx] > max)
+            max = arr[idx];
+
+        return maxInRow(arr, idx+1, max);
+    }
+
+    private static int minInRow(int [] arr, int idx, int min){
+        // Stop in the end of the array
+        if(idx > arr.length-1)
+            return min;
+
+        if(arr[idx] < min)
+            min = arr[idx];
+
+        return minInRow(arr, idx+1, min);
+    }
+
+    /**
+     * Here you can test the function above with debugger and see how it works *
      */
     public static void main(String[] args) {
+        int [][] matrix = {{1, 2, 3}, {4, 5, 8}, {7, 8, 9}};
+        System.out.println("isMatrixAscending=" + isMatrixAscending(matrix, 0));  // true
 
         System.out.println("countSumToN=" + countSumToN(5));
 
