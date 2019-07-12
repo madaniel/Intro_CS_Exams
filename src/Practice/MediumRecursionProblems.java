@@ -308,9 +308,35 @@ public class MediumRecursionProblems {
     }
 
     /**
+     * In given array of numbers with 2 digits, we need to count all the ways from index 0 to the final index.
+     * The possible ways - using either the tenth or the unit digit in the numbers to step right on the array.
+     *
+     * @param arr array of 2 digit numbers
+     * @param idx index of the array
+     * @return true if the way found
+     */
+    public static int howManyPathExist(int [] arr, int idx){
+        // Stop condition - we've reached the final position
+        if(idx == arr.length-1)
+            return 1;
+
+        // We missed it
+        if(idx > arr.length-1)
+            return 0;
+
+        int tenthDigit = arr[idx] / 10;
+        int unitDigit = arr[idx] % 10;
+
+        return howManyPathExist(arr, idx+tenthDigit) + howManyPathExist(arr, idx+unitDigit);
+    }
+
+    /**
      * Here you can test the function above with debugger and see how it works *
      */
     public static void main(String[] args) {
+        int [] testDigit = {34, 59, 74, 12, 15, 17};
+        System.out.println("howManyPathExist=" + howManyPathExist( testDigit, 0));
+
         int [][] matrix = {{1, 2, 3}, {4, 5, 8}, {7, 8, 9}};
         System.out.println("isMatrixAscending=" + isMatrixAscending(matrix, 0));  // true
 
