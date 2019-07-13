@@ -123,13 +123,41 @@ public class Exam2017 {
                 x[i] = 0;
     }
 
+    /**
+     * Question 2017a B1 90
+     *
+     * @param items Item objects with value and weight
+     * @param w Weight of the knapsack     *
+     * @return
+     */
+    public static int knapSack(Item[] items, int w){
+        return knapSack(items, w, 0, 0);
+    }
 
+    private static int knapSack(Item[] items, int w, int idx, int value){
+        // Stop condition - we overweight, so discard the value
+        if(w < 0)
+            return 0;
 
+        // We've reached the end of the array, return the value accumulated
+        if(idx > items.length-1)
+            return value;
+
+        // We try to pickup the value
+        int way1 = knapSack(items, w-items[idx].getWeight(), idx +1, value+items[idx].getValue());
+        // We try to skip this value
+        int way2 = knapSack(items, w, idx +1, value);
+
+        return Math.max(way1, way2);
+    }
 
     /**
      * Here you can test the function above with debugger and see how it works     *
      */
     public static void main(String[] args) {
+        Item [] items = {new Item(10, 60), new Item(20, 100), new Item(30, 120), new Item(15, 200)};
+        System.out.println(knapSack(items, 30)); // 260
+        System.out.println(knapSack(items, 50)); // 360
         int [][] mat = {{1, 5, 7}, {3, 2, 9}, {1, 2, 8}};
         int [] arr = {1, 2, 8};
         System.out.println(covers(mat, arr, 1)); // true
