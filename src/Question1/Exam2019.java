@@ -28,8 +28,6 @@ public class Exam2019 {
         way2 = count(str, strIndex+1, pattern, ptrIndex);
 
         return way1 + way2;
-
-
     }
 
     /**
