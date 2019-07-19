@@ -1,4 +1,4 @@
-package Practice;
+package Practice.Recursion;
 
 /**
  * If you understand these problems and can solve them by yourself, you are ready to solve exam level problems

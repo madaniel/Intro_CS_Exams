@@ -1,4 +1,4 @@
-package Practice;
+package Practice.Recursion;
 
 /**
  * After understanding how Recursion works, you can look on more complex problems of Recursion

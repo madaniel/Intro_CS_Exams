@@ -1,4 +1,4 @@
-package Practice;
+package Practice.Recursion;
 
 /**
  * Basic problems to understand the basic idea of Recursion
