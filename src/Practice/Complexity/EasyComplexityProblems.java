@@ -1,5 +1,7 @@
 package Practice.Complexity;
 
+import java.util.Arrays;
+
 public class EasyComplexityProblems {
 
     /**
@@ -55,10 +57,36 @@ public class EasyComplexityProblems {
         return (max-min) > num;
     }
 
-    public static void main(String[] args) {
-        int [] numArray = {1, 3, 5, 7, 11};
-        System.out.println(twoSum(numArray, 12)); // True
-        System.out.println(diffBiggerThan(numArray, 11)); // False
+    /**
+     * Find if there's any difference between 2 numbers in the array which is smaller than target number
+     * Similar to last problem but now we can't just use min and max diff - we need to check every diff between the numbers
+     * If the given array is not sorted, we need to use sort.
+     * @param arr unsorted array
+     * @param num number to find
+     * @return true - if the num is smaller than all diffs between each pair, false - otherwise
+     */
+    public static boolean diffSmallerThan(int [] arr, int num){
+        Arrays.sort(arr);
+        int diff;
+
+        // looking for diff between each pair of numbers in the array
+        for(int i=0; i < arr.length -1; i++){
+            diff = Math.abs(arr[i] - arr[i+1]);
+            // Check the diff between 2 pairs
+            if(diff < num)
+                return true;
+        }
+
+        // We've completed to scan the array
+        return false;
     }
 
+    public static void main(String[] args) {
+        int [] numArray = {1, 3, 5, 7, 11};
+        int [] numArray2 = {3, 1, 6, 15, 10};
+        System.out.println(twoSum(numArray, 12)); // True
+        System.out.println(diffBiggerThan(numArray, 11)); // False
+        System.out.println(diffSmallerThan(numArray2, 1)); // False
     }
+
+}
