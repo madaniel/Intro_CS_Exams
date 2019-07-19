@@ -31,9 +31,34 @@ public class EasyComplexityProblems {
         return false;
     }
 
+    /**
+     * Find if there's any difference between 2 numbers in the array which is larger than target number
+     * @param arr unsorted array of numbers
+     * @param num target number
+     * @return true - found diff larger than num, false - not found
+     */
+    public static boolean diffBiggerThan(int [] arr, int num){
+        // We find the max and the min from the array
+        int min = arr[0];
+        int max = arr[0];
+
+        for(int i=0; i < arr.length; i++){
+            // find max
+            if(arr[i] > max)
+                max = arr[i];
+            // find min
+            if(arr[i] < min)
+                min = arr[i];
+        }
+
+        // The diff between max and min is the largest diff in the array
+        return (max-min) > num;
+    }
+
     public static void main(String[] args) {
         int [] numArray = {1, 3, 5, 7, 11};
         System.out.println(twoSum(numArray, 12)); // True
+        System.out.println(diffBiggerThan(numArray, 11)); // False
     }
 
     }
