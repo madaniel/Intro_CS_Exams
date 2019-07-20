@@ -6,26 +6,28 @@ public class EasyComplexityProblems {
 
     /**
      * Find if 2 numbers in the array summed to target number
+     * Time complexity : O(n)
+     * Space complexity : O(1)
      * @param arr sorted array of numbers
-     * @param sum  target sum to find
+     * @param num  target sum to find
      * @return true - found sum false - not found
      */
-    public static boolean twoSum(int [] arr, int sum){
+    public static boolean twoSum(int [] arr, int num){
         int leftIndex = 0;
         int rightIndex = arr.length-1;
 
-        while (leftIndex != rightIndex){
+        while (leftIndex < rightIndex){
 
             // We've found it
-            if(arr[leftIndex] + arr[rightIndex] == sum)
+            if(arr[leftIndex] + arr[rightIndex] == num)
                 return true;
 
             // We move the right index left (decreasing the sum)
-            if(arr[leftIndex] + arr[rightIndex] < sum)
+            if(arr[leftIndex] + arr[rightIndex] < num)
                 leftIndex ++;
 
             // We move the left index right (increasing the sum)
-            if(arr[leftIndex] + arr[rightIndex] > sum)
+            if(arr[leftIndex] + arr[rightIndex] > num)
                 rightIndex --;
         }
 
@@ -35,6 +37,8 @@ public class EasyComplexityProblems {
 
     /**
      * Find if there's any difference between 2 numbers in the array which is larger than target number
+     * Time complexity : O(n)
+     * Space complexity : O(1)
      * @param arr unsorted array of numbers
      * @param num target number
      * @return true - found diff larger than num, false - not found
@@ -61,6 +65,8 @@ public class EasyComplexityProblems {
      * Find if there's any difference between 2 numbers in the array which is smaller than target number
      * Similar to last problem but now we can't just use min and max diff - we need to check every diff between the numbers
      * If the given array is not sorted, we need to use sort.
+     * Time complexity : O(n log(n))
+     * Space complexity : O(1)
      * @param arr unsorted array
      * @param num number to find
      * @return true - if the num is smaller than all diffs between each pair, false - otherwise
