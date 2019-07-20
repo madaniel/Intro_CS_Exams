@@ -91,13 +91,86 @@ public class MediumComplexityProblems {
         return count;
     }
 
+    /**
+     * Find duplicate numbers in sorted array
+     * Time complexity : O(log n)
+     * Space complexity : O(1)
+     * @param arr sorted array on numbers with duplicates
+     * @param num numbers to find
+     * @return amount of duplicates of the number
+     */
+    public static int countDuplicates(int [] arr, int num){
+        // We use binary search to find start and end point of the duplicates
+        int start = 0, end = arr.length-1, mid = (start + end) / 2;
+        int left = -1, right = -1;
+
+        // Start looking for left index
+        while (start <= end){
+
+            // Mid number is too small, need to go to right slice
+            if(arr[mid] < num){
+                start = mid + 1;
+                mid = (start + end) / 2;
+            }
+
+            // Mid number is too large, need to go to left slice
+            else if(arr[mid] > num){
+                end = mid - 1;
+                mid = (start + end) / 2;
+            }
+
+            // Mid number is the number, but not the first duplication - need to got to left slice
+            else if(arr[mid] == num && mid != 0 && arr[mid-1] == arr[mid]){
+                    end = mid - 1;
+                    mid = (end - start) / 2;
+                    }
+            else{
+                left = mid;
+                break;
+                }
+        }
+
+        // Start looking for right index
+        start = 0;
+        end = arr.length-1;
+        mid = (start + end) / 2;
+
+        while (start <= end){
+
+            // Mid number is too small, need to go to right slice
+            if(arr[mid] < num){
+                start = mid + 1;
+                mid = (start + end) / 2;
+            }
+
+            // Mid number is too large, need to go to left slice
+            else if(arr[mid] > num){
+                end = mid - 1;
+                mid = (start + end) / 2;
+            }
+
+            // Mid number is the number, but not the last duplication, need to got to right slice
+            else if(arr[mid] == num && mid != arr.length-1 && arr[mid+1] == arr[mid]){
+                start = mid + 1;
+                mid = (start + end) / 2;
+            }
+            else{
+                right = mid;
+                break;
+            }
+
+        }
+
+        // Total number of duplicated numbers
+        return (right - left +1);
+    }
+
     public static void main(String[] args) {
         int [] numArray = {1, 11, 21, 31, 41};
+        int [] numArray2 = {2, 3, 4, 4, 4, 5, 6, 11, 15, 15, 15, 15};
         System.out.println(threeSum(numArray, 93)); // True
         System.out.println(threeSum(numArray, 11)); // False
         System.out.println(countSub("abbab", 'a', 'b')); // 4
+        System.out.println(countDuplicates(numArray2, 4)); // 3
     }
-
-
-
 }
