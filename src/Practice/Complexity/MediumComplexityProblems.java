@@ -63,10 +63,39 @@ public class MediumComplexityProblems {
         return false;
     }
 
+    /**
+     * Count how many subString found in a string starting from start char to end char
+     * For example: "abb" start='a' end='b' -> result: 2 ["ab", "abb"]
+     * "abbab" start='a' end='b' -> result: 4 ["ab", "abb", "abbab", "ab"]
+     * Time complexity : O(n)
+     * Space complexity : O(1)
+     * @param s String
+     * @param start char to start search
+     * @param end char to end search
+     * @return count of the subString
+     */
+    public static int countSub(String s, char start, char end){
+        int countEnd = 0;
+        int count = 0;
+
+        // We scan the string backwards
+        for(int i=s.length()-1; i>=0; i--){
+            // Every end char can be attached to any start chars
+            if(s.charAt(i) == end)
+                countEnd ++;
+            // Any end char we've found will be counted as 1 subString
+            if(s.charAt(i) == start)
+                count += countEnd;
+        }
+
+        return count;
+    }
+
     public static void main(String[] args) {
         int [] numArray = {1, 11, 21, 31, 41};
         System.out.println(threeSum(numArray, 93)); // True
         System.out.println(threeSum(numArray, 11)); // False
+        System.out.println(countSub("abbab", 'a', 'b')); // 4
     }
 
 
