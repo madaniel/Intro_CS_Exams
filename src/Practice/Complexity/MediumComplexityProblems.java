@@ -107,23 +107,20 @@ public class MediumComplexityProblems {
         // Start looking for left index
         while (start <= end){
 
+            mid = (start + end) / 2;
+
             // Mid number is too small, need to go to right slice
-            if(arr[mid] < num){
+            if(arr[mid] < num)
                 start = mid + 1;
-                mid = (start + end) / 2;
-            }
 
             // Mid number is too large, need to go to left slice
-            else if(arr[mid] > num){
+            else if(arr[mid] > num)
                 end = mid - 1;
-                mid = (start + end) / 2;
-            }
 
             // Mid number is the number, but not the first duplication - need to got to left slice
-            else if(arr[mid] == num && mid != 0 && arr[mid-1] == arr[mid]){
+            else if(arr[mid] == num && mid != 0 && arr[mid-1] == arr[mid])
                     end = mid - 1;
-                    mid = (end - start) / 2;
-                    }
+
             else{
                 left = mid;
                 break;
@@ -137,40 +134,140 @@ public class MediumComplexityProblems {
 
         while (start <= end){
 
+            mid = (start + end) / 2;
+
             // Mid number is too small, need to go to right slice
-            if(arr[mid] < num){
+            if(arr[mid] < num)
                 start = mid + 1;
-                mid = (start + end) / 2;
-            }
 
             // Mid number is too large, need to go to left slice
-            else if(arr[mid] > num){
+            else if(arr[mid] > num)
                 end = mid - 1;
-                mid = (start + end) / 2;
-            }
 
             // Mid number is the number, but not the last duplication, need to got to right slice
-            else if(arr[mid] == num && mid != arr.length-1 && arr[mid+1] == arr[mid]){
+            else if(arr[mid] == num && mid != arr.length-1 && arr[mid+1] == arr[mid])
                 start = mid + 1;
-                mid = (start + end) / 2;
-            }
+
             else{
                 right = mid;
                 break;
             }
-
         }
 
         // Total number of duplicated numbers
         return (right - left +1);
     }
 
+    /**
+     * Return true if half of sorted array contains duplicates
+     * Time complexity : O(log(n))
+     * Space complexity : O(1)
+     * @param arr sorted array of numbers
+     * @return true - half of the array contains duplicates, false - otherwise
+     */
+    public static boolean isHalfDuplicates(int [] arr){
+        // Option 1 - same number exists on the array start until the middle [1, 1, 1, 2, 3, 4]
+        int targetNumber = arr[0];
+        int rightIndex = findRightEdge(arr, targetNumber);
+
+        if(rightIndex + 1 >= arr.length / 2)
+            return true;
+
+        // Option 2 - same number exists in the middle of the array [1, 2, 3, 3, 3, 3, 7, 8]
+        targetNumber = arr[arr.length/2];
+        int leftIndex =  findLeftEdge(arr, targetNumber);
+        rightIndex = findRightEdge(arr, targetNumber);
+
+        return (rightIndex - leftIndex)+1 >= arr.length / 2;
+    }
+
+    /**
+     * Find the final right index with the same instance of number
+     * @param arr sorted array of numbers
+     * @param num target number to find
+     * @return index of the final right instance
+     */
+    private static int findRightEdge(int [] arr, int num){
+
+        // We use modified version of Binary Search to find most left index of number
+        int start = 0;
+        int end = arr.length-1;
+        int mid = (start + end) / 2;
+        int rightIndex = -1;
+
+        while (start <= end){
+
+            // Mid number is too small, need to go to right slice
+            if(arr[mid] < num)
+                start = mid + 1;
+
+            // Mid number is too large, need to go to left slice
+            else if(arr[mid] > num)
+                end = mid - 1;
+
+            // Mid number is the number, but not the last duplication, need to got to right slice
+            else if(arr[mid] == num && mid != arr.length-1 && arr[mid+1] == arr[mid])
+                start = mid + 1;
+
+            else{
+                rightIndex = mid;
+                break;
+            }
+
+            mid = (start + end) / 2;
+        }
+
+        return rightIndex;
+    }
+
+    /**
+     * Find the final left index with the same instance of number
+     * @param arr sorted array of numbers
+     * @param num target number to find
+     * @return index of the final left instance
+     */
+    private static int findLeftEdge(int [] arr, int num){
+
+        // We use modified version of Binary Search to find most left index of number
+        int start = 0;
+        int end = arr.length-1;
+        int mid = (start + end) / 2;
+        int leftIndex = -1;
+
+        while (start <= end){
+
+            // Mid number is too small, need to go to right slice
+            if(arr[mid] < num)
+                start = mid + 1;
+
+            // Mid number is too large, need to go to left slice
+            else if(arr[mid] > num)
+                end = mid - 1;
+
+            // Mid number is the number, but not the first duplication - need to got to left slice
+            else if(arr[mid] == num && mid != 0 && arr[mid-1] == arr[mid])
+                end = mid - 1;
+
+            // Found it
+            else{
+                leftIndex = mid;
+                break;
+            }
+
+            mid = (start + end) / 2;
+        }
+
+        return leftIndex;
+    }
+
     public static void main(String[] args) {
         int [] numArray = {1, 11, 21, 31, 41};
         int [] numArray2 = {2, 3, 4, 4, 4, 5, 6, 11, 15, 15, 15, 15};
+        int [] numArray3 = {1, 2, 2, 2, 2, 4, 5, 6};
         System.out.println(threeSum(numArray, 93)); // True
         System.out.println(threeSum(numArray, 11)); // False
         System.out.println(countSub("abbab", 'a', 'b')); // 4
         System.out.println(countDuplicates(numArray2, 4)); // 3
+        System.out.println(isHalfDuplicates(numArray3)); // True
     }
 }
