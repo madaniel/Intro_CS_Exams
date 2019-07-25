@@ -1,4 +1,4 @@
-# Intro_CS_Exams
+# Intro to CS Exams Solutions
 
 Here you can find repository of Exam questions and practice questions from last years.
 
