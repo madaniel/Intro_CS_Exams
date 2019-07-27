@@ -19,18 +19,42 @@ public class Tester {
      * Exploring overridden methods
      */
     public static void overridingTest(){
-        Child user = new Child();
+        Child user = new Child(8);
         user.printName();
         user.printParentName(); // Will NOT work (child name will be printed) since the parent method is overridden
         user.printParentId(); // Will work since parent method was not overridden
         user.nickName = "ch"; // <OK> since we've overridden Parent private nickname
+        Child user2 = new Child("user2");  // Will use Parent constructor
     }
 
-    public static void testAbstract(){
-        // Human user = new Human(); <COMPILATION error> since Human class is Abstract
+    public static void abstractTest(){
+        // Human user = new Human(); raises <COMPILATION error> since Human class is Abstract
         Man user = new Man(); // <OK> since we inherited the abstract class Human
         user.doNothing();
         user.doSomething();
+    }
+
+    public static void polymorphismTest (){
+        Parent poly = new Child();
+        // poly.play();  raises <COMPILATION error> since play method is only in Child class but not in Parent
+
+        if(poly instanceof Child){
+            System.out.println("Yes");
+            // poly.play();  raises <COMPILATION error> even after if to verify it's a Child instance
+        }
+        ((Child) poly).play(); // <OK> this will work due the DownCasting
+        poly.work();  // <OK> this method is only in Parent
+        poly.speak(); // <OK> this method is on both, so Child method will be called
+
+
+
+
+
+
+
+
+
+
     }
 
     /**
@@ -39,7 +63,8 @@ public class Tester {
     public static void main(String[] args){
         permissionsTest();
         overridingTest();
-        testAbstract();
+        abstractTest();
+        polymorphismTest();
     }
 }
 

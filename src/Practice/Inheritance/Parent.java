@@ -7,9 +7,9 @@ public class Parent {
     private int id;
 
     /**
-     * Removing the empty constructor will cause a *COMPILATION ERROR*
-     * Since we've override the default constructor and made a child class
-     * The child class will try to call the empty constructor and will fail
+     * Removing the empty constructor will raise a *COMPILATION ERROR*
+     * Since we've override the default constructor and made a child class *with empty contractor*
+     * The child class will try to call the empty constructor of Parent and will fail
      */
     public Parent(){
         System.out.println("Parent empty constructor called");
@@ -56,5 +56,13 @@ public class Parent {
 
     private void doNothingInPrivate(){
         System.out.println("Parent do nothing in private");
+    }
+
+    public void work(){
+        System.out.println("Parent is working");
+    }
+
+    public void speak(){
+        System.out.println("Parent is speaking");
     }
 }

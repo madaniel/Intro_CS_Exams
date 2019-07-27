@@ -15,7 +15,11 @@ public class Child extends Parent {
     public Child(int childAge) {
         super(); // <OK> but redundant
         age = childAge;
-        // super(); <COMPILATION error> since it's should be in first line
+        // super(); Will raise <COMPILATION error> since it's should be in first line
+    }
+
+    public Child(String childName) {
+        super(childName);  // Will use Parent constructor
     }
 
     public void printName() {
@@ -58,6 +62,14 @@ public class Child extends Parent {
      */
     public void doNothingInProtected(){
         System.out.println("Parent do nothing in protected");
+    }
+
+    public void play(){
+        System.out.println("Child is playing");
+    }
+
+    public void speak(){
+        System.out.println("Child is speaking");
     }
 }
 
