@@ -26,10 +26,20 @@ public class Tester {
         user.nickName = "ch"; // <OK> since we've overridden Parent private nickname
     }
 
+    public static void testAbstract(){
+        // Human user = new Human(); <COMPILATION error> since Human class is Abstract
+        Man user = new Man(); // <OK> since we inherited the abstract class Human
+        user.doNothing();
+        user.doSomething();
+    }
 
+    /**
+     * You may want to run this with debugger to see how it works step by step
+     */
     public static void main(String[] args){
         permissionsTest();
         overridingTest();
+        testAbstract();
     }
 }
 

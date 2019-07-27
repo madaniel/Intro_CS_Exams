@@ -57,8 +57,4 @@ public class Parent {
     private void doNothingInPrivate(){
         System.out.println("Parent do nothing in private");
     }
-
-
-
-
 }
