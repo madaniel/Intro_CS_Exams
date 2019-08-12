@@ -46,15 +46,14 @@ public class Tester {
         poly.work();  // <OK> this method is only in Parent
         poly.speak(); // <OK> this method is on both, so Child method will be called
 
-
-
-
-
-
-
-
-
-
+        try {
+            Parent tmp = new Parent();
+            ((Child)tmp).play(); // <RUNTIME error> the casting prevent the compiler to raise an error
+            // Child inherits Parent but tmp is Parent object without polymorphism
+        }
+        catch (ClassCastException e){
+            System.out.println("This line will raise Runtime Error");
+        }
     }
 
     /**
