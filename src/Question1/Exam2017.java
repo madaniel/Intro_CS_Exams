@@ -152,6 +152,45 @@ public class Exam2017 {
     }
 
     /**
+     * 2017B B4 93
+     * @param mat matrix of 0 / 1
+     * @return number of islands of 1 on the matrix
+     */
+    public static int cntTrueReg(boolean [][] mat){
+        return cntTrueReg(mat, 0, 0);
+    }
+
+    private static int cntTrueReg(boolean [][] mat, int row, int col){
+        // Stop condition
+        if(!isValid(mat, row, col))
+            return 0;
+
+        // We found 1, reset all 1 island and add 1 to counter
+        if(mat[row][col]){
+            floodFill(mat, row, col);
+            return 1;}
+
+        return cntTrueReg(mat, row, col+1) + cntTrueReg(mat, row+1, col);
+    }
+
+    private static boolean isValid(boolean [][] mat, int row, int col){
+        return row >= 0 &&  row < mat.length && col >= 0 && col < mat[0].length;
+    }
+
+    private static void floodFill(boolean [][] mat, int row, int col){
+        // Stop condition
+        if(!isValid(mat, row, col) || ! mat[row][col])
+            return;
+
+        mat[row][col] = false;
+
+        floodFill(mat, row+1, col);
+        floodFill(mat, row, col+1);
+        floodFill(mat, row-1, col);
+        floodFill(mat, row, col-1);
+    }
+
+    /**
      * Here you can test the function above with debugger and see how it works     *
      */
     public static void main(String[] args) {
@@ -164,6 +203,13 @@ public class Exam2017 {
         System.out.println(edit("abcd", "abcxd")); // 1
         System.out.println(edit("sunday", "saturday")); // 4
         System.out.println(ways(4, 2)); // 4
+
+        boolean [] [] matB = {{false, false, false, false, true},
+                            {false, true, true, true, false},
+                            {false, false, true, true, false},
+                            {true, false, false, false, false},
+                            {true, true, false, false, false}};
+        System.out.println(cntTrueReg(matB));
     }
 
 }
