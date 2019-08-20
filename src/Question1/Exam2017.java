@@ -9,13 +9,20 @@ public class Exam2017 {
 
     /**
      * Question 2017b A4 85
-     * @param n
-     * @return
+     * @param n target number
+     * @return min addition required to target number
      */
     public static int oneFiveSeven(int n){
         return oneFiveSeven(n, 0, 0);
     }
 
+    /**
+     * Simple min function since Math.min is prohibited in this question
+     * @param num1
+     * @param num2
+     * @param num3
+     * @return
+     */
     private static int min(int num1, int num2, int num3){
         int tmpMin = num1 < num2 ? num1 : num2;
         tmpMin = tmpMin < num3 ? tmpMin : num3;
