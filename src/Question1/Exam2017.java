@@ -119,10 +119,12 @@ public class Exam2017 {
         // Mark 0 in matched numbers in current row in matrix
         xZero(arr, mat[y]);
 
-        // Found a match
+        // Found a match - all numbers matched got zero
         if(allZero(arr))
             return true;
 
+        // We backtrack into 2 options: one with decrement of k and one without decrement.
+        // K represent the number of lines we allowed to check.
         return covers(mat, arr, k-1, y+1) || covers(mat, arr, k , y+1);
     }
 
