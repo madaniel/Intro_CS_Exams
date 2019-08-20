@@ -8,6 +8,39 @@ import java.util.stream.IntStream;
 public class Exam2017 {
 
     /**
+     * Question 2017b A4 85
+     * @param n
+     * @return
+     */
+    public static int oneFiveSeven(int n){
+        return oneFiveSeven(n, 0, 0);
+    }
+
+    private static int min(int num1, int num2, int num3){
+        int tmpMin = num1 < num2 ? num1 : num2;
+        tmpMin = tmpMin < num3 ? tmpMin : num3;
+
+        return tmpMin;
+    }
+
+    private static int oneFiveSeven(int n, int currentNum, int counter){
+        // Stop condition - number is larger - we set an oversize number which will fail in the minimum check
+        if(currentNum > n)
+            return currentNum;
+
+        // We've found a match
+        if (currentNum == n)
+            return counter;
+
+        // We try the 3 possible ways
+        int way1 = oneFiveSeven(n, currentNum + 1, counter +1);
+        int way2 = oneFiveSeven(n, currentNum + 5, counter +1);
+        int way3 = oneFiveSeven(n, currentNum + 7, counter +1);
+
+        return min(way1, way2, way3);
+    }
+
+    /**
      * Question 2017b A3 84
      * @param k steps allowed
      * @param n target number
@@ -194,6 +227,11 @@ public class Exam2017 {
      * Here you can test the function above with debugger and see how it works     *
      */
     public static void main(String[] args) {
+        System.out.println(oneFiveSeven(10)); // 2
+        System.out.println(oneFiveSeven(5)); // 2
+        System.out.println(oneFiveSeven(6)); // 2
+
+
         Item [] items = {new Item(10, 60), new Item(20, 100), new Item(30, 120), new Item(15, 200)};
         System.out.println(knapSack(items, 30)); // 260
         System.out.println(knapSack(items, 50)); // 360
