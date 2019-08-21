@@ -4,6 +4,8 @@ public class Exam2016 {
 
     /**
      * Question 2016A 83
+     * Time complexity : O(log n)
+     * Space complexity : O(1)
      * @param arr array of numbers
      * @param num target sum
      * @return true - sum of 2 numbers found, false - not found
