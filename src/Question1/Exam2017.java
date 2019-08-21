@@ -111,7 +111,7 @@ public class Exam2017 {
         return covers(mat, copyArr, k, 0);
     }
 
-    public static boolean covers(int [][] mat, int [] arr, int k, int y){
+    private static boolean covers(int [][] mat, int [] arr, int k, int y){
         // Stop condition - end of matrix or all allowed rows checked
         if(k==0 || y > mat.length-1)
             return false;
@@ -125,7 +125,7 @@ public class Exam2017 {
 
         // We backtrack into 2 options: one with decrement of k and one without decrement.
         // K represent the number of lines we allowed to check.
-        return covers(mat, arr, k-1, y+1) || covers(mat, arr, k , y+1);
+        return covers(mat, arr, k-1, y+1) || covers(mat, arr, k , y+2);
     }
 
     /**
@@ -244,11 +244,22 @@ public class Exam2017 {
         Item [] items = {new Item(10, 60), new Item(20, 100), new Item(30, 120), new Item(15, 200)};
         System.out.println(knapSack(items, 30)); // 260
         System.out.println(knapSack(items, 50)); // 360
+
         int [][] mat = {{1, 5, 7}, {3, 2, 9}, {1, 2, 8}};
         int [] arr = {1, 2, 8};
         System.out.println(covers(mat, arr, 1)); // true
+
+        int [] arr2 = {1, 2, 10};
+        System.out.println(covers(mat, arr2, 3)); // false
+
+        int [] arr3 = {3, 5, 9};
+        System.out.println(covers(mat, arr3, 3)); // true
+
+
+
         System.out.println(edit("abcd", "abcxd")); // 1
         System.out.println(edit("sunday", "saturday")); // 4
+
         System.out.println(ways(4, 2)); // 4
 
         boolean [] [] matB = {{false, false, false, false, true},
