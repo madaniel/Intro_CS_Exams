@@ -3,6 +3,28 @@ package Question2;
 public class Exam2017 {
 
     /**
+     * Question 2017A b1 90
+     * @param arr array of int
+     * @return minimal number which is not one of the numbers nor sum of the numbers
+     */
+    public static int findSmallest(int [] arr){
+        int sum = arr[0];
+
+        // We iterate over the array looking for gaps of more than 1
+        for(int i=1; i < arr.length; i++){
+
+            // We also need to verify we have a gap of more than 1 from the total sum
+            if(arr[i] - arr[i-1] > 1 && arr[i] - sum > 1)
+                return sum + 1;
+
+            sum += arr[i];
+        }
+
+        // The minimum number will be next number after sum
+        return sum + 1;
+    }
+
+    /**
      * Question 2017A a6 87
      * Time complexity : O(n^2)
      * Space complexity : O(1)
@@ -224,6 +246,18 @@ public class Exam2017 {
     }
 
     public static void main(String[] args) {
+
+        int [] arr11 = {1, 1, 1, 1};
+        int [] arr12 = {1, 2, 6, 10};
+        int [] arr13 = {1, 1, 3, 4};
+        int [] arr14 = {1, 3, 5, 10};
+        int [] arr15 = {1, 2, 4, 10};
+
+        System.out.println(findSmallest(arr11)); // 5
+        System.out.println(findSmallest(arr12)); // 4
+        System.out.println(findSmallest(arr13)); // 10
+        System.out.println(findSmallest(arr14)); // 2
+        System.out.println(findSmallest(arr15)); // 8
 
         int [] arr1 = {1, 3, 4, 5, 6};
         int [] arr2 = {8, 9, 10, 15, 16, 17};
