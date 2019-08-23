@@ -1,6 +1,6 @@
 package Question4.Exam2018A_87;
 
-public class BBB extends AAA{
+public class BBB extends AAA {
 
     private String _st;
     public BBB ()
