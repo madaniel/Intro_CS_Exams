@@ -3,6 +3,27 @@ package Question1;
 public class Exam2016 {
 
     /**
+     * Question 2016A 87
+     * @param arr array of numbers
+     * @return minimum difference between any of sub-groups in the array
+     */
+    public static int minDiff(int [] arr){
+        return minDiff(arr, 0, 0, 0);
+    }
+
+    private static int minDiff(int [] arr, int i, int sum1, int sum2){
+        // Stop condition - index reached the end of the array
+        if (i == arr.length)
+            return Math.abs(sum1 - sum2);
+
+        // We use 2 sum to calculate
+        int subGroup1 = minDiff(arr, i+1, sum1+arr[i], sum2);
+        int subGroup2 = minDiff(arr, i+1, sum1, sum2+arr[i]);
+
+        return Math.min(subGroup1, subGroup2);
+    }
+
+    /**
      * Question 2016a A2 83
      * @param m matrix of numbers
      * @return min number to cross the matrix
@@ -43,6 +64,10 @@ public class Exam2016 {
     }
 
     public static void main(String[] args) {
+
+        int [] arr = {5, 2, 4};
+        System.out.println(minDiff(arr));
+
         int [][] mat = {{-2, -3, 3}, {-5, -10, 1}, {10, 30, -5}};
         System.out.println(minPoints(mat));
     }
