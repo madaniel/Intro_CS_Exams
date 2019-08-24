@@ -3,6 +3,24 @@ package Question2;
 public class Exam2016 {
 
     /**
+     * Question 2016A 87
+     * @param a array of 0 and 1
+     * @return number of collisions between 1 and 0
+     */
+    public static int passingCars(int [] a){
+        int count1 = 0, countColl = 0;
+
+        for(int i=a.length-1; i>=0; i--){
+            if(a[i] == 1)
+                count1 += 1;
+            if(a[i] == 0)
+                countColl += count1;
+        }
+
+        return countColl;
+    }
+
+    /**
      * Question 2016A 83
      * Time complexity : O(log n)
      * Space complexity : O(1)
@@ -69,6 +87,9 @@ public class Exam2016 {
 
 
     public static void main(String[] args) {
+        int [] arr11 = {0, 1, 0, 1, 1};
+        System.out.println(passingCars(arr11));
+
         int [] arr1 = {1, 2, 5, 3, 6, 10, 9};
         int [] arr2 = {1};
         int [] arr3 = {1, 9};
