@@ -56,6 +56,19 @@ public class Tester {
         }
     }
 
+    public static void castingTest() {
+        Parent parent = new Parent();
+        Child child = new Child();
+
+        parent = child; // upCasting works
+
+        // child = parent; // downCasting gets compilation errors
+        child = (Child)(parent); // this will work since downCasting from parent to child allows, if you pass the compiler
+
+        Human human = new Man();
+        // child = (Child)(human); // this will get compilation error even with casting because classes are not related in inheritance
+    }
+
     /**
      * You may want to run this with debugger to see how it works step by step
      */
@@ -64,6 +77,7 @@ public class Tester {
         overridingTest();
         abstractTest();
         polymorphismTest();
+        castingTest();
     }
 }
 
